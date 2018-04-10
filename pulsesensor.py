@@ -2,20 +2,18 @@
 
 import time
 import threading
-#from MCP3008 import MCP3008
 import Adafruit_MCP3008
 import Adafruit_GPIO.SPI as SPI
-#from spidev import SpiDev
 
 
 class Pulsesensor:
     def __init__(self, channel = 0, bus = 0, device = 0):
         self.channel = channel
         self.BPM = 0
-#        self.adc = MCP3008.MCP3008(bus, device)
         self.adc = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(bus,device))
         
     def getBPMLoop(self):
+
         # init variables
         rate = [0] * 10         # array to hold last 10 IBI values
         sampleCounter = 0       # used to determine pulse timing
